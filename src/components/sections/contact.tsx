@@ -33,13 +33,27 @@ export function Contact({ dict }: ContactProps) {
 
   const onSubmit = async (data: ContactFormValues) => {
     try {
-      // Simulate API call (Replace with actual API route later if needed)
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Send data to our Next.js API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error('Server responded with error:', errorData);
+        throw new Error('Failed to send message to server');
+      }
+
+      toast.success(dict.contact.toast.success);
+      reset(); // Clear the form
       
-      toast.success(dict.contact.toast.success)
-      reset()
     } catch (error) {
-      toast.error(dict.contact.toast.error)
+      console.error('Contact form submission error:', error);
+      toast.error(dict.contact.toast.error);
     }
   }
 

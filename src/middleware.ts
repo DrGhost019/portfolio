@@ -20,10 +20,10 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|_vercel|.*\\..*).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
-  ],
+  // Match all pathnames EXCEPT:
+  // - /api (API routes)
+  // - /_next (Next.js internals)
+  // - /_vercel (Vercel internals)
+  // - /favicon.ico, etc. (files with extensions)
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };
