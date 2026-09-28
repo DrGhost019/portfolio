@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 html {
   scroll-behavior: smooth;
@@ -6,61 +6,56 @@ html {
 
 @layer base {
   :root {
-    /*  Light Mode Colors */
-    --color-primary: #0A2540;
-    --color-primary-hover: #0F3460;
-    --color-accent: #1E6FEB;
-    --color-accent-hover: #1758C9;
-    --color-background: #FFFFFF;
-    --color-surface: #F8FAFC;
-    --color-text-primary: #0A2540;
-    --color-text-secondary: #5B7290;
-    --color-border: #E2E8F0;
-    --color-success: #10B981;
-    --color-error: #EF4444;
+    --color-primary: #0a2540;
+    --color-primary-hover: #0f3460;
+    --color-accent: #1e6feb;
+    --color-accent-hover: #1758c9;
+    --color-background: #ffffff;
+    --color-surface: #f8fafc;
+    --color-text-primary: #0a2540;
+    --color-text-secondary: #5b7290;
+    --color-border: #e2e8f0;
+    --color-success: #10b981;
+    --color-error: #ef4444;
   }
 
   .dark {
-    /* 🌙 Dark Mode Colors */
-    --color-primary: #5B9DFF;
-    --color-primary-hover: #8BB8FF;
-    --color-accent: #7CB9FF;
-    --color-accent-hover: #A5CCFF;
-    --color-background: #0A0E1A;
+    --color-primary: #5b9dff;
+    --color-primary-hover: #8bb8ff;
+    --color-accent: #7cb9ff;
+    --color-accent-hover: #a5ccff;
+    --color-background: #0a0e1a;
     --color-surface: #111827;
-    --color-text-primary: #F1F5F9;
-    --color-text-secondary: #94A3B8;
-    --color-border: #1E293B;
-    --color-success: #34D399;
-    --color-error: #F87171;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-border: #1e293b;
+    --color-success: #34d399;
+    --color-error: #f87171;
   }
 
   * {
     border-color: var(--color-border);
   }
-  
+
   body {
     background-color: var(--color-background);
     color: var(--color-text-primary);
     font-family: var(--font-inter), system-ui, sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
-  /* Switch to Vazirmatn when in RTL/Persian mode */
-  html[dir="rtl"] body {
+  html[dir='rtl'] body {
     font-family: var(--font-vazirmatn), system-ui, sans-serif;
   }
 }
 
-/* --- Custom Neon Scrollbar --- */
-
-/* Firefox Support */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-background);
 }
 
-/* Chrome, Edge, and Safari Support */
 *::-webkit-scrollbar {
   width: 10px;
 }
@@ -68,15 +63,14 @@ html {
 *::-webkit-scrollbar-track {
   background: var(--color-background);
   border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for depth */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--color-accent);
   border-radius: 10px;
   border: 2px solid var(--color-background);
-  /* The Neon Glow Effect */
-  box-shadow: 
+  box-shadow:
     0 0 5px var(--color-accent),
     0 0 10px var(--color-accent),
     0 0 15px color-mix(in srgb, var(--color-accent) 50%, transparent);
@@ -85,8 +79,7 @@ html {
 
 *::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-primary);
-  /* Brighter glow on hover */
-  box-shadow: 
+  box-shadow:
     0 0 10px var(--color-accent),
     0 0 20px var(--color-accent),
     0 0 30px color-mix(in srgb, var(--color-accent) 60%, transparent);

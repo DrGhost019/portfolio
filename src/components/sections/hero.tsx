@@ -3,18 +3,18 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { usePortfolioStatus } from '@/hooks/use-portfolio-status';
+import type { Dictionary } from '@/lib/i18n/dictionaries';
 import { HeroScene } from '@/components/3d/hero-scene';
 
 interface HeroProps {
-  status: string;
   headline: string;
   subheadline: string;
   cta1: string;
   cta2: string;
   cta3: string;
+  dict: Dictionary;
 }
-
-// Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
@@ -28,16 +28,41 @@ const staggerContainer = {
   },
 } as const;
 
-export function Hero({ status, headline, subheadline, cta1, cta2, cta3 }: HeroProps) {
+export function Hero({ headline, subheadline, cta1, cta2, cta3, dict }: HeroProps) {
+  const { status: portfolioStatus } = usePortfolioStatus();
+
+  const getStatusColor = (type: 'bg' | 'text' | 'border' | 'shadow') => {
+    if (portfolioStatus === 'open') {
+      if (type === 'bg') return 'color-mix(in srgb, var(--color-success) 10%, transparent)';
+      if (type === 'text') return 'var(--color-success)';
+      if (type === 'border') return 'color-mix(in srgb, var(--color-success) 30%, transparent)';
+      if (type === 'shadow')
+        return '0 0 15px color-mix(in srgb, var(--color-success) 15%, transparent)';
+    }
+    if (portfolioStatus === 'busy') {
+      if (type === 'bg') return 'color-mix(in srgb, #eab308 10%, transparent)';
+      if (type === 'text') return '#eab308';
+      if (type === 'border') return 'color-mix(in srgb, #eab308 30%, transparent)';
+      if (type === 'shadow') return '0 0 15px color-mix(in srgb, #eab308 15%, transparent)';
+    }
+    if (type === 'bg') return 'color-mix(in srgb, #ef4444 10%, transparent)';
+    if (type === 'text') return '#ef4444';
+    if (type === 'border') return 'color-mix(in srgb, #ef4444 30%, transparent)';
+    return '0 0 15px color-mix(in srgb, #ef4444 15%, transparent)';
+  };
+
+  const getStatusText = () => {
+    if (portfolioStatus === 'open') return dict.hero.statusOpen || 'Open to Work';
+    if (portfolioStatus === 'busy') return dict.hero.statusBusy || 'Working on a project';
+    return dict.hero.statusClosed || 'Not available';
+  };
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
-      {/* 3D Background */}
       <HeroScene />
 
-      {/* Gradient Overlay for better text readability */}
       <div className="from-background/20 via-background/50 to-background pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b" />
 
-      {/* Content */}
       <div className="relative z-10 container mx-auto max-w-5xl px-4 pb-32 text-center">
         <motion.div
           variants={staggerContainer}
@@ -45,34 +70,30 @@ export function Hero({ status, headline, subheadline, cta1, cta2, cta3 }: HeroPr
           animate="visible"
           className="flex flex-col items-center gap-6"
         >
-          {/* Status Badge - Exact Prototype Green Glassmorphism */}
           <motion.div variants={fadeInUp}>
             <span
               className="inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5 text-xs font-medium backdrop-blur-md"
               style={{
-                color: 'var(--color-success)',
-                backgroundColor: 'color-mix(in srgb, var(--color-success) 10%, transparent)',
-                borderColor: 'color-mix(in srgb, var(--color-success) 30%, transparent)',
-                boxShadow: '0 0 15px color-mix(in srgb, var(--color-success) 15%, transparent)',
+                color: getStatusColor('text'),
+                backgroundColor: getStatusColor('bg'),
+                borderColor: getStatusColor('border'),
+                boxShadow: getStatusColor('shadow'),
               }}
             >
               <span className="relative flex h-2 w-2">
-                {/* The pulsing ripple effect */}
                 <span
                   className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-                  style={{ backgroundColor: 'var(--color-success)' }}
+                  style={{ backgroundColor: getStatusColor('text') }}
                 ></span>
-                {/* The solid center dot */}
                 <span
                   className="relative inline-flex h-2 w-2 rounded-full"
-                  style={{ backgroundColor: 'var(--color-success)' }}
+                  style={{ backgroundColor: getStatusColor('text') }}
                 ></span>
               </span>
-              {status}
+              {getStatusText()}
             </span>
           </motion.div>
 
-          {/* Headline - Gradient Text (White/Navy to Blue) */}
           <motion.h1
             variants={fadeInUp}
             className="bg-gradient-to-r from-[var(--color-text-primary)] to-[var(--color-accent)] bg-clip-text text-4xl leading-tight font-bold tracking-tight text-transparent md:text-6xl lg:text-7xl"
@@ -80,7 +101,6 @@ export function Hero({ status, headline, subheadline, cta1, cta2, cta3 }: HeroPr
             {headline}
           </motion.h1>
 
-          {/* Subheadline - Grayish-White Tone */}
           <motion.p
             variants={fadeInUp}
             className="mx-auto max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)] md:text-xl"
@@ -88,12 +108,10 @@ export function Hero({ status, headline, subheadline, cta1, cta2, cta3 }: HeroPr
             {subheadline}
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             variants={fadeInUp}
             className="mt-4 flex flex-wrap items-center justify-center gap-4"
           >
-            {/* Primary Button with Glow Effect */}
             <Button
               variant="default"
               size="lg"
@@ -112,7 +130,6 @@ export function Hero({ status, headline, subheadline, cta1, cta2, cta3 }: HeroPr
               <Link href="#contact">{cta2}</Link>
             </Button>
 
-            {/* About Me Link - Explicitly Blue (Primary Color) */}
             <Link
               href="#about"
               className="text-primary hover:text-primary-hover text-sm font-semibold underline-offset-4 transition-colors hover:underline"
@@ -123,35 +140,31 @@ export function Hero({ status, headline, subheadline, cta1, cta2, cta3 }: HeroPr
         </motion.div>
       </div>
 
-      {/* Scroll Indicator with Neon Animated Line */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3"
+        className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3"
       >
-        {/* Off-white gray text */}
-        <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[var(--color-text-secondary)]">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-secondary)] uppercase">
           Scroll
         </span>
-        
-        {/* The Neon Animated Scrolling Line */}
-        <div className="w-[2px] h-12 rounded-full overflow-hidden flex justify-center relative bg-[var(--color-border)]/10">
+
+        <div className="relative flex h-12 w-[2px] justify-center overflow-hidden rounded-full bg-[var(--color-border)]/10">
           <motion.div
-            className="w-full rounded-full bg-[var(--color-accent)] relative z-10"
-            style={{ 
+            className="relative z-10 w-full rounded-full bg-[var(--color-accent)]"
+            style={{
               originY: 0,
-              // The Neon Glow Effect
-              boxShadow: '0 0 10px var(--color-accent), 0 0 20px var(--color-accent)' 
+              boxShadow: '0 0 10px var(--color-accent), 0 0 20px var(--color-accent)',
             }}
-            animate={{ 
+            animate={{
               scaleY: [0, 1, 0],
-              opacity: [0, 1, 0]
+              opacity: [0, 1, 0],
             }}
-            transition={{ 
-              duration: 1.8, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: 'easeInOut',
             }}
           />
         </div>

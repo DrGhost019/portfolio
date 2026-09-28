@@ -23,14 +23,10 @@ export function TimelineItem({ item, index }: TimelineItemProps) {
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       className="relative ps-8 pb-10 last:pb-0"
     >
-      {/* Vertical Line & Dot (Using logical properties for RTL/LTR) */}
-      {/* border-s creates a border on the 'start' side (left in LTR, right in RTL) */}
       <div className="absolute start-0 top-2 bottom-0 w-[2px] bg-border last:bg-transparent" />
       
-      {/* The Dot */}
       <div className="absolute start-[-9px] top-2 w-4 h-4 rounded-full bg-primary border-[3px] border-background" />
 
-      {/* Content */}
       <div className="flex flex-col gap-1">
         <span className="font-mono text-xs font-semibold text-primary tracking-wide">
           {item.date}

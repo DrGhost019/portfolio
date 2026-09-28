@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 interface MagneticProps {
   children: ReactNode
   className?: string
-  strength?: number // Default pull strength
+  strength?: number 
 }
 
 export function Magnetic({ children, className, strength = 0.4 }: MagneticProps) {

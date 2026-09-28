@@ -10,7 +10,9 @@ const dictionaries = {
       contact: 'Contact',
     },
     hero: {
-      status: 'Open to Work (Freelance / Full-time)',
+      statusOpen: 'Open to Work (Freelance / Full-time)',
+      statusBusy: 'Currently working on a project',
+      statusClosed: 'Not available for projects right now',
       headline: 'Turning your ideas into real web products',
       subheadline:
         'With nearly 3 years of experience in React, Next.js, and Node.js, I build web projects from start to finish — fast, precise, and on time.',
@@ -158,7 +160,7 @@ const dictionaries = {
         { icon: 'medal', text: 'Silver medal in provincial swimming' },
       ],
     },
-        certifications: {
+    certifications: {
       label: 'Certifications & Resume',
       title: 'Certificates & Background',
       cert: {
@@ -169,15 +171,17 @@ const dictionaries = {
         verifyText: 'Verify Certificate',
       },
       resume: {
-        description: 'For more details about my background and skills, you can download my resume as a PDF.',
+        description:
+          'For more details about my background and skills, you can download my resume as a PDF.',
         buttonText: 'Download Resume (PDF)',
         fileUrl: '/MyResume.pdf',
       },
     },
     contact: {
       label: 'Contact Me',
-      title: 'Have a project in mind? Let\'s talk!',
-      subheadline: 'I\'m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Reach out via the form below or through my direct contact info. I usually reply within 24 hours.',
+      title: "Have a project in mind? Let's talk!",
+      subheadline:
+        "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Reach out via the form below or through my direct contact info. I usually reply within 24 hours.",
       form: {
         name: 'Full Name',
         namePlaceholder: 'Your name',
@@ -193,7 +197,9 @@ const dictionaries = {
       info: {
         title: 'Direct Contact Info',
         location: 'Qom, Iran — Open to Remote',
-        status: 'Open to Work (Freelance / Full-time)',
+        statusOpen: 'Open to Work (Freelance / Full-time)',
+        statusBusy: 'Currently working on a project',
+        statusClosed: 'Not available for projects right now',
       },
       social: {
         title: 'Social & Professional Links',
@@ -221,7 +227,9 @@ const dictionaries = {
       contact: 'تماس',
     },
     hero: {
-      status: 'آماده همکاری (فریلنس / تمام‌وقت)',
+      statusOpen: 'آماده همکاری (فریلنسری / تمام‌وقت)',
+      statusBusy: 'در حال حاضر مشغول یک پروژه هستم',
+      statusClosed: 'در حال حاضر ظرفیت پذیرش پروژه جدید ندارم',
       headline: 'ایده‌های شما را به محصولات وب واقعی تبدیل می‌کنم',
       subheadline:
         'با نزدیک به ۳ سال تجربه در React، Next.js و Node.js، پروژه‌های وب را از صفر تا صد پیاده‌سازی می‌کنم — سریع، دقیق و در زمان مقرر.',
@@ -369,7 +377,7 @@ const dictionaries = {
         { icon: 'medal', text: 'مدال نقره شنای استانی' },
       ],
     },
-        certifications: {
+    certifications: {
       label: 'مدارک و رزومه',
       title: 'گواهینامه‌ها و سوابق',
       cert: {
@@ -380,7 +388,8 @@ const dictionaries = {
         verifyText: 'اعتبارسنجی گواهینامه',
       },
       resume: {
-        description: 'برای بررسی جزئیات بیشتر سوابق و مهارت‌های من، می‌توانید رزومه‌ام را به صورت PDF دانلود کنید.',
+        description:
+          'برای بررسی جزئیات بیشتر سوابق و مهارت‌های من، می‌توانید رزومه‌ام را به صورت PDF دانلود کنید.',
         buttonText: 'دانلود رزومه (PDF)',
         fileUrl: '/MyResume.pdf',
       },
@@ -388,7 +397,8 @@ const dictionaries = {
     contact: {
       label: 'تماس با من',
       title: 'پروژه‌ای در ذهن دارید؟ بیایید صحبت کنیم!',
-      subheadline: 'من همیشه آماده شنیدن ایده‌های جدید، بررسی چالش‌های فنی و همکاری در پروژه‌های هیجان‌انگیز هستم. از طریق فرم زیر یا راه‌های ارتباطی مستقیم با من در تماس باشید. معمولاً در کمتر از ۲۴ ساعت پاسخ می‌دهم.',
+      subheadline:
+        'من همیشه آماده شنیدن ایده‌های جدید، بررسی چالش‌های فنی و همکاری در پروژه‌های هیجان‌انگیز هستم. از طریق فرم زیر یا راه‌های ارتباطی مستقیم با من در تماس باشید. معمولاً در کمتر از ۲۴ ساعت پاسخ می‌دهم.',
       form: {
         name: 'نام و نام خانوادگی',
         namePlaceholder: 'نام شما',
@@ -404,7 +414,9 @@ const dictionaries = {
       info: {
         title: 'اطلاعات تماس مستقیم',
         location: 'قم، ایران — آماده همکاری ریموت',
-        status: 'آماده همکاری (فریلنس / تمام‌وقت)',
+        statusOpen: 'آماده همکاری (فریلنسری / تمام‌وقت)',
+        statusBusy: 'در حال حاضر مشغول یک پروژه هستم',
+        statusClosed: 'در حال حاضر ظرفیت پذیرش پروژه جدید ندارم',
       },
       social: {
         title: 'شبکه‌های اجتماعی',
